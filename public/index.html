@@ -1,0 +1,75 @@
+<!-- public/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8" />
+   <title>Realtime Device Config</title>
+   <script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
+   <style>
+      body {
+         font-family: sans-serif;
+         padding: 2em;
+      }
+
+      input,
+      button {
+         padding: 0.5em;
+         margin: 0.5em 0;
+         width: 100%;
+      }
+
+      pre {
+         background: #f5f5f5;
+         padding: 1em;
+      }
+   </style>
+</head>
+
+<body>
+   <h2>Realtime Firebase Config Manager</h2>
+
+   <label>Device ID:</label>
+   <input type="text" id="deviceId" value="device123" />
+
+   <button onclick="getConfig()">Get Config</button>
+   <button onclick="updateConfig()">Commit New Config</button>
+
+   <pre id="output">Waiting for response...</pre>
+
+   <script>
+      const socket = io();
+
+      socket.on("connect", () => {
+         log("Connected to server");
+      });
+
+      socket.on("configUpdated", ({ deviceId, config }) => {
+         log(`🔄 Config updated for ${deviceId}: ${JSON.stringify(config, null, 2)}`);
+      });
+
+      function getConfig() {
+         const deviceId = document.getElementById("deviceId").value;
+         socket.emit("getFirebaseConfig", deviceId, (response) => {
+            log(`📦 Config for ${deviceId}:\n` + JSON.stringify(response.config, null, 2));
+         });
+      }
+
+      function updateConfig() {
+         const deviceId = document.getElementById("deviceId").value;
+         const config = {
+            databaseUrl: prompt("Database URL:", "https://new-db.firebaseio.com"),
+            apiKey: prompt("API Key:", "new-key"),
+            projectId: prompt("Project ID:", "new-project"),
+            appId: prompt("App ID:", "new-app"),
+         };
+         socket.emit("commitConfig", { deviceId, config });
+      }
+
+      function log(message) {
+         document.getElementById("output").textContent = message;
+      }
+   </script>
+</body>
+
+</html>

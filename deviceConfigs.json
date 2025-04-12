@@ -1,0 +1,20 @@
+{
+  "device123": {
+    "databaseUrl": "https://new-22.firebaseio.com",
+    "apiKey": "new-key",
+    "projectId": "new-project",
+    "appId": "new-app"
+  },
+  "device1234": {
+    "databaseUrl": "https://new-db22222.firebaseio.com",
+    "apiKey": "new-key",
+    "projectId": "new-project",
+    "appId": "new-app"
+  },
+  "device12333": {
+    "databaseUrl": "https://new-db.firebaseio.com",
+    "apiKey": "new-key",
+    "projectId": "new-project",
+    "appId": "new-app"
+  }
+}
