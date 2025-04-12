@@ -35,10 +35,10 @@ if (fs.existsSync(CONFIG_FILE)) {
 }
 
 const DEFAULT_CONFIG = {
-  databaseUrl: "https://default-db.firebaseio.com",
-  apiKey: "default-key",
-  projectId: "default-project",
-  appId: "default-app",
+  databaseUrl: "https://cooldude-88379-default-rtdb.firebaseio.com",
+  apiKey: "AIzaSyBt06-UOjjs75eySqqdNU9O8qv9nYHOPfY",
+  projectId: "cooldude-88379",
+  appId: "1:435966902362:web:133b0715cd80a19f531863",
 };
 
 // Save function
